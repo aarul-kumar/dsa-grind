@@ -1,32 +1,13 @@
 class Solution {
-    String ans = "";
-    HashSet<String> set = new HashSet<>();
-
-    private boolean checkAns(String s) {
-        if(!set.contains(s)) {
-            ans = s;
-            return true;
-        }
-        return false;
-    }
-
-    private boolean binString(int n, String s) {
-        if(n == 0) {
-            return checkAns(s);
-        }
-
-        if(binString(n-1, s+"0")) return true;
-        if(binString(n-1, s+"1")) return true;
-
-        return false;
-    }
-
     public String findDifferentBinaryString(String[] nums) {
-        for(String num : nums) {
-            set.add(num);
+        StringBuilder sb = new StringBuilder("");
+        for(int i=0; i<nums.length; i++) {
+            if(nums[i].charAt(i)=='0') {
+                sb.append(1);
+            } else {
+                sb.append(0);
+            }
         }
-
-        binString(nums.length, "");
-        return ans;
+        return sb.toString();
     }
 }
