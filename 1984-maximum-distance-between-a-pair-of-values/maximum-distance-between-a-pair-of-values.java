@@ -5,13 +5,10 @@ class Solution {
         int ans = 0;
         while(i<nums1.length && j<nums2.length) {
             if(nums1[i]<=nums2[j]) {
+                ans = Math.max(ans, j-i);
                 j++;
-                ans = Math.max(ans, j-1-i);
             } else {
                 i++;
-                if(j<i) {
-                    j=i;
-                }
             }
         }
         return ans;
