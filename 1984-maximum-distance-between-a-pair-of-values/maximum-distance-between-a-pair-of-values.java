@@ -9,6 +9,9 @@ class Solution {
                 ans = Math.max(ans, j-1-i);
             } else {
                 i++;
+                if(j<i) {
+                    j=i;
+                }
             }
         }
         return ans;
