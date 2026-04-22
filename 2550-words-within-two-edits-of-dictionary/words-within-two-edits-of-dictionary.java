@@ -4,19 +4,20 @@ class Solution {
         for(int i=0; i<s1.length(); i++) {
             if(s1.charAt(i)!=s2.charAt(i)) {
                 d++;
+                if(d>2) {
+                    return d;
+                }
             }
         }
         return d;
     }
     public List<String> twoEditWords(String[] queries, String[] dictionary) {
-        int n = queries.length;
-        int m = dictionary.length;
         List<String> l = new ArrayList<>();
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<m; j++) {
-                if(diff(queries[i],dictionary[j])<=2) {
-                    l.add(queries[i]);
-                    j=m-1;
+        for(String q : queries) {
+            for(String d : dictionary) {
+                if(diff(q,d)<=2) {
+                    l.add(q);
+                    break;
                 }    
             }
         }
