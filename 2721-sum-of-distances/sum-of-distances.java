@@ -2,33 +2,23 @@ class Solution {
     public long[] distance(int[] nums) {
         int n = nums.length;
         long arr[] = new long[n];
-        HashMap<Integer, Long> indexSum = new HashMap<>();
-        HashMap<Integer, Long> indexFreq = new HashMap<>();
+        HashMap<Integer, Long> sum = new HashMap<>();
+        HashMap<Integer, Long> freq = new HashMap<>();
         for(int i=0; i<n; i++) {
-            if(indexFreq.containsKey(nums[i])) {
-                long freq = indexFreq.get(nums[i]);
-                long sum = indexSum.get(nums[i]);
-                arr[i] += freq*i - sum;
-                indexFreq.put(nums[i], freq+1);
-                indexSum.put(nums[i], sum+i);
-            } else {
-                indexFreq.put(nums[i], 1L);
-                indexSum.put(nums[i], (long) i);
-            }
+            long f = freq.getOrDefault(nums[i], 0L);
+            long s = sum.getOrDefault(nums[i], 0L);
+            arr[i] += f*i-s;
+            freq.put(nums[i], f+1);
+            sum.put(nums[i], s+i);
         }
-        indexSum.clear();
-        indexFreq.clear();
+        sum.clear();
+        freq.clear();
         for(int i=n-1; i>=0; i--) {
-            if(indexFreq.containsKey(nums[i])) {
-                long freq = indexFreq.get(nums[i]);
-                long sum = indexSum.get(nums[i]);
-                arr[i] += sum - freq*i;
-                indexFreq.put(nums[i], freq+1);
-                indexSum.put(nums[i], sum+i);
-            } else {
-                indexFreq.put(nums[i], 1L);
-                indexSum.put(nums[i], (long) i);
-            }
+            long f = freq.getOrDefault(nums[i], 0L);
+            long s = sum.getOrDefault(nums[i], 0L);
+            arr[i] += s-f*i;
+            freq.put(nums[i], f+1);
+            sum.put(nums[i], s+i);
         }
         return arr;
     }
