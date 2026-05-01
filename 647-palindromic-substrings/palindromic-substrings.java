@@ -1,27 +1,17 @@
 class Solution {
+    int count = 0;
+    private void check(String s, int i, int j, int n) {
+        while(i>=0 && j<n && s.charAt(i)==s.charAt(j)) {
+            count++;
+            i--;
+            j++;
+        }
+    }
     public int countSubstrings(String s) {
         int n = s.length();
-        Boolean dp[][] = new Boolean[n][n];
-        int count = 0;
-        for(int l=1; l<=n; l++) {
-            for(int i=0; i+l-1<n; i++) {
-                int j = i+l-1;
-                if(i==j) {
-                    dp[i][j] = true;
-                }
-                else if(i+1==j) {
-                    dp[i][j] = (s.charAt(i)==s.charAt(j));
-                }
-                else if(s.charAt(i)==s.charAt(j) && dp[i+1][j-1]==true) {
-                    dp[i][j] = true;
-                }
-                else {
-                    dp[i][j] = false;
-                }
-                if(dp[i][j]==true) {
-                    count++;
-                }
-            }
+        for(int i=0; i<n; i++) {
+            check(s, i, i, n);
+            check(s, i, i+1, n);
         }
         return count;
     }
