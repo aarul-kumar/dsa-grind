@@ -5,18 +5,12 @@ class Solution {
         int val = 0;
         for(int i=0; i<A.length; i++) {
             freq[A[i]]++;
+            if(freq[A[i]]==2) {
+                val++;
+            }
             freq[B[i]]++;
-            if(A[i]!=B[i]) {
-                if(freq[A[i]]==2) {
-                    val++;
-                }
-                if(freq[B[i]]==2) {
-                    val++;
-                }
-            } else {
-                if(freq[A[i]]==2) {
-                    val++;
-                }
+            if(freq[B[i]]==2) {
+                val++;
             }
             ans[i] = val;
         }
