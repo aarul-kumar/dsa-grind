@@ -1,5 +1,6 @@
 class Solution {
     List<List<Integer>> ans=new ArrayList<>();
+    int time=0;
     class Edge {
         int src;
         int dest;
@@ -23,7 +24,6 @@ class Solution {
     public void tarjans(ArrayList<Edge> graph[], int V) {
         int dt[]=new int[V];
         int low[]=new int[V];
-        int time=0;
         boolean vis[]=new boolean[V];
         for(int i=0; i<V; i++){
             if(!vis[i]){
