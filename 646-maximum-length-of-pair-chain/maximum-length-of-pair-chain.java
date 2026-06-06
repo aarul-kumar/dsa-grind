@@ -3,7 +3,8 @@ class Solution {
         Arrays.sort(pairs, Comparator.comparingInt(o->o[1]));
         int maxLen = 1;
         int lastEnd = pairs[0][1];
-        for(int i=1; i<pairs.length; i++){
+        int n = pairs.length;
+        for(int i=1; i<n; i++){
             if(lastEnd<pairs[i][0]){
                 maxLen++;
                 lastEnd=pairs[i][1];
