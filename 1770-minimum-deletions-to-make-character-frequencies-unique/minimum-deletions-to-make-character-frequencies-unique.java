@@ -4,7 +4,6 @@ class Solution {
         for(int i=0; i<s.length(); i++) {
             hm.put(s.charAt(i),hm.getOrDefault(s.charAt(i),0)+1);
         }
-        int steps = 0;
         ArrayList<Integer> arr = new ArrayList<>();
         for(int val:hm.values()) {
             arr.add(val);
