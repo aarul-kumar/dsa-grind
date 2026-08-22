@@ -1,24 +1,24 @@
 class Solution {
-    private void dfs(int i, int j, char[][] grid){
-        if(i<0 || i>=grid.length || j<0 || j>=grid[0].length || grid[i][j]!='1'){
+    public void dfs(int x, int y, char[][] grid) {
+        if(x<0 || x>=grid.length || y<0 || y>=grid[0].length || grid[x][y]!='1') {
             return;
         }
-        grid[i][j]='0';
-        dfs(i-1, j, grid);
-        dfs(i+1, j, grid);
-        dfs(i, j-1, grid);
-        dfs(i, j+1, grid);
+        grid[x][y] = '2';
+        dfs(x-1,y,grid);
+        dfs(x,y-1,grid);
+        dfs(x+1,y,grid);
+        dfs(x,y+1,grid);
     }
     public int numIslands(char[][] grid) {
-        int num = 0;
-        for(int i=0; i<grid.length; i++){
-            for(int j=0; j<grid[0].length; j++){
-                if(grid[i][j]=='1'){
-                    num++;
+        int ans = 0;
+        for(int i=0; i<grid.length; i++) {
+            for(int j=0; j<grid[0].length; j++) {
+                if(grid[i][j]=='1') {
                     dfs(i,j,grid);
+                    ans++;
                 }
             }
         }
-        return num;
+        return ans;
     }
 }
