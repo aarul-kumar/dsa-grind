@@ -1,31 +1,46 @@
 class Solution {
-    class Edge{
+    class Edge {
         int src;
         int dest;
-        Edge(int src,int dest){
-            this.src=src;
-            this.dest=dest;
+        Edge(int s, int d) {
+            this.src = s;
+            this.dest = d;
         }
     }
-    public boolean isBipartite(ArrayList<Edge> graph[]){
-        int col[] = new int[graph.length];
-        for(int i=0; i<col.length; i++){
-            col[i]=-1;
+    public void createGraph(ArrayList<Edge> graph[], int grid[][]) {
+        for(int i=0; i<graph.length; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        for(int i=0; i<grid.length; i++) {
+            for(int j=0; j<grid[i].length; j++) {
+                int src = i;
+                int dest = grid[i][j];
+                graph[src].add(new Edge(src,dest));
+                graph[dest].add(new Edge(dest,src));
+            }
+        }
+    }
+    public boolean isBipartite(int[][] graphy) {
+        ArrayList<Edge> graph[] = new ArrayList[graphy.length];
+        createGraph(graph, graphy);
+        int col[] = new int[graphy.length];
+        for(int i=0; i<col.length; i++) {
+            col[i] = -1;
         }
         Queue<Integer> q = new LinkedList<>();
-        for(int i=0; i<graph.length; i++){
-            if(col[i]==-1){
+        for(int i=0; i<graph.length; i++) {
+            if(col[i]==-1) {
                 q.add(i);
-                col[i]=0;
-                while(!q.isEmpty()){
+                col[i] = 0;
+                while(!q.isEmpty()) {
                     int curr = q.remove();
-                    for(int j=0; j<graph[curr].size(); j++){
+                    for(int j=0; j<graph[curr].size(); j++) {
                         Edge e = graph[curr].get(j);
-                        if(col[e.dest]==-1){
-                            int nextCol = col[curr] == 0? 1: 0;
+                        if(col[e.dest]==-1) {
+                            int nextCol = col[curr] == 0?1:0;
                             col[e.dest] = nextCol;
                             q.add(e.dest);
-                        } else if(col[e.dest]==col[curr]){
+                        } else if(col[e.dest]==col[curr]) {
                             return false;
                         }
                     }
@@ -33,18 +48,5 @@ class Solution {
             }
         }
         return true;
-    }
-    public boolean isBipartite(int[][] graph) {
-        int V=graph.length;
-        ArrayList<Edge> graphy[] = new ArrayList[V];
-        for(int i=0; i<V; i++){
-            graphy[i]=new ArrayList<>();
-        }
-        for(int i=0; i<V; i++){
-            for(int j=0; j<graph[i].length; j++){
-                graphy[i].add(new Edge(i,graph[i][j]));
-            }
-        }
-        return isBipartite(graphy);
     }
 }
